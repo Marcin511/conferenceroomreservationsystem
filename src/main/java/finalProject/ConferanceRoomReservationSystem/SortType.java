@@ -1,2 +1,4 @@
-package finalProject.ConferanceRoomReservationSystem;public enum SortType {
+package finalProject.ConferanceRoomReservationSystem;
+public enum SortType {
+    ASC,DESC
 }
