@@ -1,9 +1,9 @@
 package finalProject.ConferanceRoomReservationSystem.organization.args;
 
+import finalProject.ConferanceRoomReservationSystem.organization.Organization;
 import org.junit.jupiter.api.extension.ExtensionContext;
 import org.junit.jupiter.params.provider.Arguments;
 import org.junit.jupiter.params.provider.ArgumentsProvider;
-import pl.sdacademy.ConferenceRoomReservationSystem.organization.Organization;
 
 import java.util.Arrays;
 import java.util.Collections;

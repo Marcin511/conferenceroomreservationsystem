@@ -16,7 +16,6 @@ import org.springframework.context.annotation.Bean;
 import org.springframework.data.domain.Sort;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
 
-
 import java.util.NoSuchElementException;
 import java.util.Optional;
 
@@ -165,12 +164,31 @@ class OrganizationServiceTest {
         Mockito.verify(organizationRepository).findByName(name);
     }
 
-    @TestConfiguration
-    static class OrganizationServiceTestConfig {
+    @Test
+    void when_update_organization_name_which_is_not_unique_then_exception_should_be_thrown(String name, Organization organization) {
+        //given
+        String name1 = "Intive";
+        Organization existingOrg1 = new Organization(name1, "Delivery company");
+        String name2 = "Tieto";
+        Organization existingOrg2 = new Organization(name2, "IT company");
+        Organization updateOrganization = new Organization(name2, "Delivery company");
+        Mockito.when(organizationRepository.findByName(name1)).thenReturn(Optional.of(existingOrg1));
+        Mockito.when(organizationRepository.findByName(name2)).thenReturn(Optional.of(existingOrg2));
 
-        @Bean
-        OrganizationService organizationService(OrganizationRepository organizationRepository) {
-            return new OrganizationService(organizationRepository);
-        }
+        //when
+        //then
+        assertThrows(IllegalArgumentException.class, () -> {
+            organizationService.updateOrganization(name1, updateOrganization);
+        });
+        Mockito.verify(organizationRepository, Mockito.never()).save(updateOrganization);
+    }
+}
+
+@TestConfiguration
+class OrganizationServiceTestConfig {
+
+    @Bean
+    OrganizationService organizationService(OrganizationRepository organizationRepository) {
+        return new OrganizationService(organizationRepository);
     }
 }

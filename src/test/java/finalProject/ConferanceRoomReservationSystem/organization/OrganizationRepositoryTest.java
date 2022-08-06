@@ -1,5 +1,7 @@
 package finalProject.ConferanceRoomReservationSystem.organization;
 
+import finalProject.ConferanceRoomReservationSystem.organization.args.GetAllOrganizationArgumentProvider;
+import finalProject.ConferanceRoomReservationSystem.organization.args.GetByIdOrganizationArgumentProvider;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.extension.ExtendWith;
 import org.junit.jupiter.params.ParameterizedTest;
@@ -9,8 +11,6 @@ import org.springframework.boot.test.autoconfigure.orm.jpa.DataJpaTest;
 import org.springframework.boot.test.autoconfigure.orm.jpa.TestEntityManager;
 import org.springframework.orm.jpa.JpaSystemException;
 import org.springframework.test.context.junit.jupiter.SpringExtension;
-import pl.sdacademy.ConferenceRoomReservationSystem.organization.args.GetAllOrganizationArgumentProvider;
-import pl.sdacademy.ConferenceRoomReservationSystem.organization.args.GetByIdOrganizationArgumentProvider;
 
 import java.util.List;
 import java.util.Optional;
@@ -51,7 +51,7 @@ class OrganizationRepositoryTest {
         arg0.forEach(o -> testEntityManager.persist(o));
 
         //when
-        Optional<Organization> result = organizationRepository.findById(arg1);
+        Optional<Organization> result = organizationRepository.findById(Long.valueOf(arg1));
 
         //then
         assertEquals(arg2, result);
