@@ -11,7 +11,6 @@ import java.util.Optional;
 import java.util.stream.Stream;
 
 public class GetByIdOrganizationArgumentProvider implements ArgumentsProvider {
-    @Override
     public Stream<? extends Arguments> provideArguments(ExtensionContext extensionContext) throws Exception {
         return Stream.of(
                 Arguments.of(
@@ -20,12 +19,12 @@ public class GetByIdOrganizationArgumentProvider implements ArgumentsProvider {
                                 new Organization("Google", "IT company"),
                                 new Organization("Uber", "Delivery company")
                         ),
-                        "Intive",
-                        Optional.of(new Organization("Intive", "IT company"))
+                        1L,
+                        Optional.of(new Organization(1L, "Intive", "IT company"))
                 ),
                 Arguments.of(
                         Collections.emptyList(),
-                        "Intive",
+                        1L,
                         Optional.empty()
                 ),
                 Arguments.of(
@@ -34,7 +33,7 @@ public class GetByIdOrganizationArgumentProvider implements ArgumentsProvider {
                                 new Organization("Google", "IT company"),
                                 new Organization("Uber", "Delivery company")
                         ),
-                        "Test",
+                        4L,
                         Optional.empty()
                 )
         );

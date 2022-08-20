@@ -1,2 +1,4 @@
-package finalProject.ConferanceRoomReservationSystem.conferenceRoom;public class ConferenceRoom {
+package finalProject.ConferanceRoomReservationSystem.conferenceRoom;
+
+public class ConferenceRoom {
 }

@@ -15,6 +15,8 @@ interface UpdateOrganization {
 
 @Entity
 public class Organization {
+    public Organization() {
+    }
 
     @Id
     @GeneratedValue
@@ -26,7 +28,7 @@ public class Organization {
 
     private String description;
 
-    public Organization() {
+    public Organization(String organizationName) {
 
     }
 

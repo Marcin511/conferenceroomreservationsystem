@@ -45,13 +45,13 @@ class OrganizationRepositoryTest {
     @ParameterizedTest
     @ArgumentsSource(GetByIdOrganizationArgumentProvider.class)
     void when_find_by_arg_1_when_arg_0_list_is_available_then_arg_2_item_should_be_returned(List<Organization> arg0,
-                                                                                            String arg1,
+                                                                                            Long arg1,
                                                                                             Optional<Organization> arg2) {
         //given
         arg0.forEach(o -> testEntityManager.persist(o));
 
         //when
-        Optional<Organization> result = organizationRepository.findById(Long.valueOf(arg1));
+        Optional<Organization> result = organizationRepository.findById(arg1);
 
         //then
         assertEquals(arg2, result);
@@ -60,24 +60,12 @@ class OrganizationRepositoryTest {
     @Test
     void when_save_arg_0_to_repo_then_it_should_be_stored_properly() {
         //given
-        Organization arg0 = new Organization("Intive", "It company");
+        Organization arg0 = new Organization(1L, "Intive", "It company");
 
         //when
         organizationRepository.save(arg0);
 
         //then
-        assertEquals(arg0, testEntityManager.find(Organization.class, "Intive"));
-    }
-
-    @Test
-    void when_save_arg_0_with_wrong_primary_key_then_exception_should_be_thrown() {
-        //given
-        Organization arg0 = new Organization(null, "It company");
-
-        //when
-        //then
-        assertThrows(JpaSystemException.class, () -> {
-            organizationRepository.save(arg0);
-        });
+        assertEquals(arg0, testEntityManager.find(Organization.class, 1L));
     }
 }

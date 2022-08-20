@@ -53,9 +53,7 @@ class OrganizationServiceTest {
 
         //when
         //then
-        assertThrows(IllegalArgumentException.class, () -> {
-            organizationService.addOrganization(arg);
-        });
+        assertThrows(IllegalArgumentException.class, () -> organizationService.addOrganization(arg));
     }
 
     @Test
@@ -78,7 +76,8 @@ class OrganizationServiceTest {
     void when_delete_existing_organization_then_it_should_be_removed_from_the_repo() {
         //given
         String name = "Intive";
-        Organization arg = new Organization(name, "IT company");
+        Long id = 1L;
+        Organization arg = new Organization(id, name, "IT company");
         Mockito.when(organizationRepository.findByName(name)).thenReturn(Optional.of(arg));
 
         //when
@@ -86,7 +85,7 @@ class OrganizationServiceTest {
 
         //then
         assertEquals(arg, result);
-        Mockito.verify(organizationRepository).deleteById(arg.getId());
+        Mockito.verify(organizationRepository).deleteById(id);
     }
 
     @Test
@@ -97,9 +96,7 @@ class OrganizationServiceTest {
 
         //when
         //then
-        assertThrows(NoSuchElementException.class, () -> {
-            organizationService.deleteOrganization(name);
-        });
+        assertThrows(NoSuchElementException.class, () -> organizationService.deleteOrganization(name));
     }
 
     @Test
@@ -111,9 +108,7 @@ class OrganizationServiceTest {
 
         //when
         //then
-        assertThrows(NoSuchElementException.class, () -> {
-            organizationService.updateOrganization(name, arg);
-        });
+        assertThrows(NoSuchElementException.class, () -> organizationService.updateOrganization(name, arg));
     }
 
     @ParameterizedTest
@@ -144,9 +139,7 @@ class OrganizationServiceTest {
 
         //when
         //then
-        assertThrows(NoSuchElementException.class, () -> {
-            organizationService.getOrganization(name);
-        });
+        assertThrows(NoSuchElementException.class, () -> organizationService.getOrganization(name));
     }
 
     @Test
@@ -165,7 +158,7 @@ class OrganizationServiceTest {
     }
 
     @Test
-    void when_update_organization_name_which_is_not_unique_then_exception_should_be_thrown(String name, Organization organization) {
+    void when_update_organization_name_which_is_not_unique_then_exception_should_be_thrown() {
         //given
         String name1 = "Intive";
         Organization existingOrg1 = new Organization(name1, "Delivery company");
@@ -182,13 +175,13 @@ class OrganizationServiceTest {
         });
         Mockito.verify(organizationRepository, Mockito.never()).save(updateOrganization);
     }
-}
 
-@TestConfiguration
-class OrganizationServiceTestConfig {
+    @TestConfiguration
+    static class OrganizationServiceTestConfig {
 
-    @Bean
-    OrganizationService organizationService(OrganizationRepository organizationRepository) {
-        return new OrganizationService(organizationRepository);
+        @Bean
+        OrganizationService organizationService(OrganizationRepository organizationRepository) {
+            return new OrganizationService(organizationRepository);
+        }
     }
 }

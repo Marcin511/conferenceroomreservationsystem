@@ -106,7 +106,7 @@ public class OrganizationControllerTest {
 
         //when
         //then
-        mockMvc.perform(MockMvcRequestBuilders.delete("/organizations/" + name)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/organizations/"+name)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.name", equalTo("Intive")))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", equalTo(1)))
@@ -121,7 +121,7 @@ public class OrganizationControllerTest {
 
         //when
         //then
-        mockMvc.perform(MockMvcRequestBuilders.delete("/organizations/" + name)
+        mockMvc.perform(MockMvcRequestBuilders.delete("/organizations/"+name)
                         .contentType(MediaType.APPLICATION_JSON))
                 .andExpect(MockMvcResultMatchers.status().is4xxClientError())
                 .andExpect(MockMvcResultMatchers.status().isNotFound());
@@ -135,7 +135,7 @@ public class OrganizationControllerTest {
 
         //when
         //then
-        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.put("/organizations/" + existingOrgName)
+        ResultActions resultActions = mockMvc.perform(MockMvcRequestBuilders.put("/organizations/"+existingOrgName)
                 .contentType(MediaType.APPLICATION_JSON)
                 .content(arg1)
         );
@@ -157,7 +157,7 @@ public class OrganizationControllerTest {
 
         //when
         //then
-        mockMvc.perform(MockMvcRequestBuilders.put("/organizations/" + name)
+        mockMvc.perform(MockMvcRequestBuilders.put("/organizations/"+name)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
                                 """
@@ -182,7 +182,7 @@ public class OrganizationControllerTest {
 
         //when
         //then
-        mockMvc.perform(MockMvcRequestBuilders.put("/organizations/" + name)
+        mockMvc.perform(MockMvcRequestBuilders.put("/organizations/"+name)
                         .contentType(MediaType.APPLICATION_JSON)
                         .content(
                                 """
@@ -223,7 +223,7 @@ public class OrganizationControllerTest {
 
         //when
         //then
-        mockMvc.perform(MockMvcRequestBuilders.get("/organizations" + arg1)
+        mockMvc.perform(MockMvcRequestBuilders.get("/organizations"+arg1)
                 .contentType(MediaType.APPLICATION_JSON)
         ).andExpect(MockMvcResultMatchers.jsonPath("$", Matchers.hasSize(2)));
         Mockito.verify(organizationService).getAllOrganizations(sortArgumentCaptor.capture());
