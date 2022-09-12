@@ -89,5 +89,4 @@ class ConferenceRoomService {
                 conferenceRoomUpdater.update(id, conferenceRoomTransformer.fromDto(conferenceRoom))
         );
     }
-
 }

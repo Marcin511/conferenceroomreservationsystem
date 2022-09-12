@@ -11,7 +11,7 @@ public class Reservation {
 
     @Id
     @GeneratedValue
-    private Long id;
+    private String id;
     private String ReservationName;
     private LocalDateTime ReservationStart;
     private LocalDateTime ReservationEnd;
@@ -23,18 +23,22 @@ public class Reservation {
         return conferenceRoom;
     }
 
-    public Reservation(Long id, String reservationName, LocalDateTime reservationStart, LocalDateTime reservationEnd,ConferenceRoom conferenceRoom) {
+    public Reservation(String id, String reservationName, LocalDateTime reservationStart, LocalDateTime reservationEnd,ConferenceRoom conferenceRoom) {
         this.id = id;
         ReservationName = reservationName;
         ReservationStart = reservationStart;
         ReservationEnd = reservationEnd;
     }
 
-    public Long getId() {
+    public String getId() {
         return id;
     }
 
-    public void setId(Long id) {
+    public void setConferenceRoom(ConferenceRoom conferenceRoom) {
+        this.conferenceRoom = conferenceRoom;
+    }
+
+    public void setId(String id) {
         this.id = id;
     }
 

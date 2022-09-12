@@ -16,10 +16,10 @@ public class ReservationController {
     }
     @PostMapping
     Reservation add(@RequestBody Reservation reservation){
-    return reservationService.AddReservation(reservation);
+    return reservationService.addReservation(reservation);
     }
-    @GetMapping
-    List<Reservation>showReservation(@RequestParam(defaultValue = "ASC")SortType sortType){
-    return reservationService.showReservation(sortType);
-    }
+//    @GetMapping
+//    List<Reservation>showReservation(@RequestParam(defaultValue = "ASC")SortType sortType){
+//    return reservationService.showReservation(sortType);
+//    }
 }

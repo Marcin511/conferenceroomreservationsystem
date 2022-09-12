@@ -1,35 +1,36 @@
 package finalProject.ConferanceRoomReservationSystem.organization;
 
+import finalProject.ConferanceRoomReservationSystem.conference_room.ConferenceRoom;
+
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Size;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-interface AddOrganization {
-}
 
-interface UpdateOrganization {
-}
 
 @Entity
 public class Organization {
-    public Organization() {
-    }
 
     @Id
     @GeneratedValue
     private Long id;
-
-    @Size(min = 2, max = 20, groups = {AddOrganization.class, UpdateOrganization.class})
-    @NotBlank(groups = AddOrganization.class)
     private String name;
-
     private String description;
+    @OneToMany(mappedBy = "organization")
+    private List<ConferenceRoom> conferenceRooms = new ArrayList<>();
 
-    public Organization(String organizationName) {
+    public Organization() {
 
+    }
+
+    public Organization(String name) {
+        this.name = name;
     }
 
     public Organization(String name, String description) {
@@ -41,6 +42,13 @@ public class Organization {
         this.id = id;
         this.name = name;
         this.description = description;
+    }
+
+    public Organization(Long id, String name, String description, List<ConferenceRoom> conferenceRooms) {
+        this.id = id;
+        this.name = name;
+        this.description = description;
+        this.conferenceRooms = conferenceRooms;
     }
 
     public Long getId() {
@@ -65,6 +73,24 @@ public class Organization {
 
     public void setDescription(String description) {
         this.description = description;
+    }
+
+    public List<ConferenceRoom> getConferenceRooms() {
+        return conferenceRooms;
+    }
+
+    public void setConferenceRooms(List<ConferenceRoom> conferenceRooms) {
+        this.conferenceRooms = conferenceRooms;
+    }
+
+    @Override
+    public String toString() {
+        return "Organization{" +
+                "id=" + id +
+                ", name='" + name + '\'' +
+                ", description='" + description + '\'' +
+                ", conferenceRooms=" + conferenceRooms +
+                '}';
     }
 
     @Override

@@ -7,20 +7,24 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
+import java.util.stream.Collectors;
 
 @Service
 class OrganizationService {
 
     private final OrganizationRepository organizationRepository;
-
+    private final OrganizationTransformer organizationTransformer;
     @Autowired
-    OrganizationService(OrganizationRepository organizationRepository) {
+    public OrganizationService(OrganizationRepository organizationRepository, OrganizationTransformer organizationTransformer) {
         this.organizationRepository = organizationRepository;
+        this.organizationTransformer = organizationTransformer;
     }
 
-    List<Organization> getAllOrganizations(SortType sortType) {
+    List<OrganizationDto> getAllOrganizations(SortType sortType) {
         Sort sort = Sort.by(Sort.Direction.fromString(sortType.name()), "name");
-        return organizationRepository.findAll(sort);
+        return organizationRepository.findAll(sort).stream()
+                .map(organizationTransformer::toDto)
+                .collect(Collectors.toList());
     }
 
     Organization getOrganization(String name) {

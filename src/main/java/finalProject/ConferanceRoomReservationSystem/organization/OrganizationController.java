@@ -26,7 +26,7 @@ class OrganizationController {
     }
 
     @GetMapping
-    List<Organization> getAll(@RequestParam(defaultValue = "ASC") SortType sortType) {
+    List<OrganizationDto> getAll(@RequestParam(defaultValue = "ASC") SortType sortType) {
         return organizationService.getAllOrganizations(sortType);
     }
 

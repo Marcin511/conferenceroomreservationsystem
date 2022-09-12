@@ -24,6 +24,7 @@ import java.util.List;
             return conferenceRoomService.getConferenceRoomBy(identifier, level, organizationName, availability, numberOfSeats);
         }
 
+
         @GetMapping("/{id}")
         ConferenceRoomDto getById(@PathVariable String id) {
             return conferenceRoomService.getConferenceRoomById(id);
